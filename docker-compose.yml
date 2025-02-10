@@ -1,14 +1,46 @@
+version: '3.1'
 services:
-  stats-server:
+  ewm-stats-server:
+    build: ./ewm-stats-server/server-stats
     ports:
       - "9090:9090"
+    depends_on:
+      - stats-db
+    environment:
+      - SERVER-PORT=9090
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/ewm_stats
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mypassword
+
 
   stats-db:
     image: postgres:16.1
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=ewm_stats
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mypassword
 
-  ewm-service:
+  ewm-main-server:
+    build: ./ewm-main-server
     ports:
       - "8080:8080"
+    depends_on:
+      - main-db
+      - ewm-stats-server
+    environment:
+      - SERVER_PORT=8080
+      - STATS-SERVER_URL=http://ewm-stats-server:9090
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/ewm_main
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mypassword
 
-  ewm-db:
+  main-db:
     image: postgres:16.1
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_DB=ewm_main
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mypassword
