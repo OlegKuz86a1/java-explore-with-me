@@ -33,13 +33,14 @@ public class StatsServiceImpl implements StatsService {
         Request request = statsRepository.save(requestMapper.toEntity(requestInDto));
         log.info("added a new request: id={}, uri={}", request.getId(), request.getUri());
     }
+
     @Override
     public List<RequestHitsOutDto> getStats(String start, String end, List<String> uris, boolean unique) {
         LocalDateTime encodedStartDateTime = encodeDateTime(start);
         LocalDateTime encodedEndDateTime = encodeDateTime(end);
 
-        Stream<RequestHits> var10000 = statsRepository.
-                getRequestHits(encodedStartDateTime, encodedEndDateTime, uris, unique).stream();
+        Stream<RequestHits> var10000 = statsRepository
+                .getRequestHits(encodedStartDateTime, encodedEndDateTime, uris, unique).stream();
         RequestMapper var10001 = requestMapper;
         Objects.requireNonNull(var10001);
         return var10000
@@ -47,7 +48,6 @@ public class StatsServiceImpl implements StatsService {
                 .peek((request) -> log.info("Processed statistics for URI: {}", request.getUri()))
                 .toList();
     }
-
 
     private LocalDateTime encodeDateTime(String date) {
         if (date != null && !date.trim().isEmpty()) {

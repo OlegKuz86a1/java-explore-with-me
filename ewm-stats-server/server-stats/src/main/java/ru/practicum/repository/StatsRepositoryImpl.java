@@ -37,8 +37,8 @@ public class StatsRepositoryImpl implements StatsCustomRepository {
         }
 
         List<RequestHits> collect = query.getResultList().stream()
-                .map((arr) -> new RequestHits
-                        ((String)arr[0], //app
+                .map((arr) -> new RequestHits(
+                        (String)arr[0], //app
                         String.valueOf(Collections.singletonList((String)arr[1])), //uri
                         ((Number)arr[2]).longValue())) //hits
                 .collect(Collectors.toList());

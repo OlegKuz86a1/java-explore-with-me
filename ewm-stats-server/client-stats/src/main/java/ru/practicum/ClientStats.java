@@ -21,8 +21,9 @@ public class ClientStats extends  BaseClientStats {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public ClientStats(@Value("${client.url") String serverUrl, RestTemplateBuilder builder) {
-        super(builder.uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl)).
-                requestFactory(() -> new HttpComponentsClientHttpRequestFactory()).build());
+        super(builder.uriTemplateHandler(new DefaultUriBuilderFactory(serverUrl))
+                .requestFactory(() -> new HttpComponentsClientHttpRequestFactory())
+                .build());
     }
 
     public void addRequest(RequestInDto requestInDto) {
