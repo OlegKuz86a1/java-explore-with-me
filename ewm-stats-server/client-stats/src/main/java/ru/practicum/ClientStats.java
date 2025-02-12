@@ -9,6 +9,7 @@ import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,11 +32,11 @@ public class ClientStats extends  BaseClientStats {
     }
 
     public ResponseEntity<Object> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, Boolean unique) {
-        Map<String, Object> parameters = Map.of(
-                "start", start.format(this.formatter),
-                "end", end.format(this.formatter),
-                "uris", String.join(",", uris),
-                "unique", unique);
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("start", start != null ? start.format(this.formatter) : null);
+        parameters.put("end", end != null ? end.format(this.formatter) : null);
+        parameters.put("uris", uris != null ? String.join(",", uris) : null);
+        parameters.put("unique", unique);
         return get(API_POSTFIX_GET, parameters);
     }
 }

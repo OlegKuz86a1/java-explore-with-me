@@ -60,9 +60,9 @@ public class StatsServiceImpl implements StatsService {
                 log.error("Error decoding date: {}, reason: {}", date, e.getMessage());
                 throw new IllegalArgumentException("Invalid date format: " + date, e);
             }
-        } else {
-            return null;
         }
+        return null;
+
     }
 
 }
