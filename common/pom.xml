@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>common</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
@@ -64,6 +65,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>ru.practicum.common.CommonApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.project-lombok</groupId>
