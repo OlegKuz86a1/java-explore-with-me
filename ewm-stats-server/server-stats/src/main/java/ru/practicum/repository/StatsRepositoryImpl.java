@@ -3,9 +3,10 @@ package ru.practicum.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.model.RequestHits;
 
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 public class StatsRepositoryImpl implements StatsCustomRepository {
 
     @PersistenceContext
