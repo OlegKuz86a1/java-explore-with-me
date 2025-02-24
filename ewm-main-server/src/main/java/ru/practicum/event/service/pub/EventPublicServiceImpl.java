@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventPublicServiceImpl implements EventPublicService{
+public class EventPublicServiceImpl implements EventPublicService {
 
     private final EventRepository eventRepo;
     private final EventMapper eventMapper;
@@ -97,12 +97,12 @@ public class EventPublicServiceImpl implements EventPublicService{
             ));
         }
 
-        if (categories != null ) {
+        if (categories != null) {
             spec = spec.and(((root, query, criteriaBuilder) ->
                     root.get("category").get("id").in(categories)));
         }
 
-        if(paid != null) {
+        if (paid != null) {
             spec = spec.and(((root, query, criteriaBuilder) ->
                     paid ? criteriaBuilder.isTrue(root.get("paid"))
                             : criteriaBuilder.isFalse(root.get("paid"))));
@@ -169,6 +169,7 @@ public class EventPublicServiceImpl implements EventPublicService{
                     ));
         }
     }
+
         private void addClientStats(HttpServletRequest request) {
         clientStats.addRequest(RequestInDto.builder()
                 .app(application)

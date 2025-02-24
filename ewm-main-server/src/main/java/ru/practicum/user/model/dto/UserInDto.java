@@ -16,10 +16,10 @@ public class UserInDto {
 
     @NotBlank(message = "Email cannot be missing")
     @Email(message = "The email is incorrect")
-    @Size(min = 6, max = 254, message = "The email size should be in the range from 4 to 254 characters." )
+    @Size(min = 6, max = 254, message = "The email size should be in the range from 4 to 254 characters.")
     private String email;
 
     @NotBlank(message = "Name cannot be missing")
-    @Size(min = 2, max = 250, message = "The name size should be in the range from 2 to 250 characters." )
+    @Size(min = 2, max = 250, message = "The name size should be in the range from 2 to 250 characters.")
     private String name;
 }

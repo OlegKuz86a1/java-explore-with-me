@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping
     public List<UserOutDto> getUsers(@RequestParam(required = false) List<Long> ids,
                                     @RequestParam(defaultValue = "0") @PositiveOrZero int from,
-                                    @RequestParam(defaultValue = "10") @Min(1) int size ) {
+                                    @RequestParam(defaultValue = "10") @Min(1) int size) {
         return userService.getUsers(ids, from, size);
     }
 

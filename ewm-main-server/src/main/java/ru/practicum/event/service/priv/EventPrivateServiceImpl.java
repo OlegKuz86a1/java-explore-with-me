@@ -35,7 +35,7 @@ import static ru.practicum.enums.Status.CONFIRMED;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class EventPrivateServiceImpl implements EventPrivateService{
+public class EventPrivateServiceImpl implements EventPrivateService {
 
     private final UserRepository userRepo;
     private final EventRepository eventRepo;
@@ -185,7 +185,7 @@ public class EventPrivateServiceImpl implements EventPrivateService{
         if (update.getEventDate() != null) eventOld.setEventDate(update.getEventDate());
         if (update.getPaid() != null) eventOld.setPaid(update.getPaid());
         if (update.getParticipantLimit() != null) eventOld.setParticipantLimit(update.getParticipantLimit());
-        if (update.getRequestModeration() !=null) eventOld.setRequestModeration(update.getRequestModeration());
+        if (update.getRequestModeration() != null) eventOld.setRequestModeration(update.getRequestModeration());
 
         StateAction state = update.getState();
         if (state != null) {

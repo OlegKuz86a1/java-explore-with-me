@@ -83,7 +83,7 @@ public class RequestsServiceImp implements RequestsService {
             throw new UnfulfilledConditionException("The event has not been published, applications are not accepted");
         }
 
-        if (event.getParticipantLimit() > 0 ) {
+        if (event.getParticipantLimit() > 0) {
             int confirmationRequests = requestsRepository.countByEventIdAndStatus(event.getId(), Status.CONFIRMED);
             if (confirmationRequests >= event.getParticipantLimit())
                 throw new UnfulfilledConditionException(

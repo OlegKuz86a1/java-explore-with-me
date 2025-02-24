@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         User saveUser = userRepository.save(userMapper.toEntity(userInDto));
         log.info("New user with name {} and email {}, has been successfully added, with id={} ",
                                                             saveUser.getName(), saveUser.getEmail(), saveUser.getId());
-        return userMapper.MapToUserOutDto(saveUser);
+        return userMapper.mapToUserOutDto(saveUser);
     }
 
     @Transactional(readOnly = true)
@@ -45,14 +45,14 @@ public class UserServiceImpl implements UserService {
                 : userRepository.findAll(pageable).getContent();
 
         return users.stream()
-                .map(userMapper::MapToUserOutDto)
+                .map(userMapper::mapToUserOutDto)
                 .toList();
     }
 
     @Transactional
     @Override
     public void deleteUser(Long id) { // в тестах Постман вызов делит метода сделан с отсрочкой 60, нужно настроить транзакцию, что бы метод get сработал раньше чем delete.
-        if(!userRepository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             throw new NotFoundException(String.format("User with id=%s not found", id));
         }
         userRepository.deleteById(id);

@@ -49,7 +49,7 @@ public class CategoryServiceImp implements CategoryService {
             throw new UnfulfilledConditionException("To delete a category, it should not be linked to an event");
         }
 
-        if(!categoryRepo.existsById(catId)) {
+        if (!categoryRepo.existsById(catId)) {
             throw new UnfulfilledConditionException(String.format("Category with id=%s not found", catId));
         }
 

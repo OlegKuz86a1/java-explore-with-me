@@ -19,7 +19,7 @@ public class CompilationInDto {
     private Boolean pinned;
 
     @NotBlank(message = "Title must not be blank")
-    @Size(  min = 1,
+    @Size(min = 1,
             max = 50,
             message = "Title size should be in the range from 1 to 50 characters")
     private String title;

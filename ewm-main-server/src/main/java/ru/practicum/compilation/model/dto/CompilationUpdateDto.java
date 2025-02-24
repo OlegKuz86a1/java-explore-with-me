@@ -17,7 +17,7 @@ public class CompilationUpdateDto {
     private List<Long> events;
     private Boolean pinned;
 
-    @Size(  min = 1,
+    @Size(min = 1,
             max = 50,
             message = "Title size should be in the range from 1 to 50 characters")
     private String title;

@@ -113,7 +113,7 @@ public class EventAdminServiceImpl implements EventAdminService {
         if (update.getEventDate() != null) eventOld.setEventDate(update.getEventDate());
         if (update.getPaid() != null) eventOld.setPaid(update.getPaid());
         if (update.getParticipantLimit() != null) eventOld.setParticipantLimit(update.getParticipantLimit());
-        if (update.getRequestModeration() !=null) eventOld.setRequestModeration(update.getRequestModeration());
+        if (update.getRequestModeration() != null) eventOld.setRequestModeration(update.getRequestModeration());
         if (update.getCategory() != null && !update.getCategory().equals(eventOld.getCategory().getId())) {
             eventOld.setCategory(categoryValidator(update.getCategory()));
         }
