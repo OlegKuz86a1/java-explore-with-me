@@ -10,11 +10,13 @@ import ru.practicum.common.BaseEntity;
 import java.time.LocalDateTime;
 
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "requests")
 @SuperBuilder
-@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Request extends BaseEntity {

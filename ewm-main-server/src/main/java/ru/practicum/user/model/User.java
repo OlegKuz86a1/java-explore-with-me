@@ -7,11 +7,13 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import ru.practicum.common.BaseEntity;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
 @SuperBuilder
-@Data
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity {

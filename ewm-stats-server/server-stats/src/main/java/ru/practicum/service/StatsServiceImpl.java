@@ -39,12 +39,11 @@ public class StatsServiceImpl implements StatsService {
         LocalDateTime encodedStartDateTime = encodeDateTime(start);
         LocalDateTime encodedEndDateTime = encodeDateTime(end);
 
-        Stream<RequestHits> var10000 = statsRepository
+        Stream<RequestHits> requestHitsStream = statsRepository
                 .getRequestHits(encodedStartDateTime, encodedEndDateTime, uris, unique).stream();
-        RequestMapper var10001 = requestMapper;
-        Objects.requireNonNull(var10001);
-        return var10000
-                .map(var10001::mapToRequestDto)
+
+        return requestHitsStream
+                .map(requestMapper::mapToRequestDto)
                 .peek((request) -> log.info("Processed statistics for URI: {}", request.getUri()))
                 .toList();
     }

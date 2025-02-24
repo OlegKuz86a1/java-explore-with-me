@@ -22,7 +22,8 @@ public class StatsRepositoryImpl implements StatsCustomRepository {
     private final EntityManager entityManager;
 
     public List<RequestHits> getRequestHits(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
-        String jpql = "SELECT r.app, r.uri, " + (unique ? "COUNT(DISTINCT r.ip) " : "COUNT(r.ip) ") + "as hits FROM Request r " + String.valueOf(getStringBuilder(start, end, uris)) + " GROUP BY r.uri, r.app ORDER BY hits DESC";
+        String jpql = "SELECT r.app, r.uri, " + (unique ? "COUNT(DISTINCT r.ip) " : "COUNT(r.ip) ") + "as hits FROM Request r "
+                + getStringBuilder(start, end, uris) + " GROUP BY r.uri, r.app ORDER BY hits DESC";
         TypedQuery<Object[]> query = this.entityManager.createQuery(jpql, Object[].class);
         if (uris != null && !uris.isEmpty()) {
             query.setParameter("uris", uris);
@@ -36,14 +37,12 @@ public class StatsRepositoryImpl implements StatsCustomRepository {
             query.setParameter("end", end);
         }
 
-        List<RequestHits> collect = query.getResultList().stream()
+        return query.getResultList().stream()
                 .map((arr) -> new RequestHits(
                         (String)arr[0], //app
-                        String.valueOf(Collections.singletonList((String)arr[1])), //uri
+                        (String)arr[1], //uri
                         ((Number)arr[2]).longValue())) //hits
                 .collect(Collectors.toList());
-        System.out.println("REQUEST-HITS" + String.valueOf(collect));
-        return collect;
     }
 
     private static StringBuilder getStringBuilder(LocalDateTime start, LocalDateTime end, List<String> uris) {
@@ -53,12 +52,12 @@ public class StatsRepositoryImpl implements StatsCustomRepository {
         }
 
         if (start != null) {
-            String whereStart = "r.timestamp > :start ";
+            String whereStart = "r.timestamp >= :start ";
             condition.append(condition.isEmpty() ? "WHERE " : "AND ").append(whereStart);
         }
 
         if (end != null) {
-            String whereEnd = "r.timestamp < :end ";
+            String whereEnd = "r.timestamp <= :end ";
             condition.append(condition.isEmpty() ? "WHERE " : "AND ").append(whereEnd);
         }
 

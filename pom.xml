@@ -14,7 +14,6 @@
     <modules>
         <module>ewm-main-server</module>
 		<module>ewm-stats-server</module>
-		<module>common</module>
     </modules>
 
     <groupId>ru.practicum</groupId>
