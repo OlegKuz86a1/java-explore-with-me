@@ -121,11 +121,10 @@ public class EventPrivateServiceImpl implements EventPrivateService {
                 throw new UnfulfilledConditionException("Limit user participation");
             }
         }
-        if (status == Status.REJECTED) {
-            if (requestsRepo.findAllById(request.getRequestIds()).stream()
-                    .anyMatch(r -> r.getStatus() == CONFIRMED)) {
-                throw new UnfulfilledConditionException("Trying to reject already confirmed request");
-            }
+        if (status == Status.REJECTED &&
+                requestsRepo.findAllById(request.getRequestIds()).stream()
+                        .anyMatch(r -> r.getStatus() == CONFIRMED)) {
+            throw new UnfulfilledConditionException("Trying to reject already confirmed request");
         }
 
         requestsRepo.updateStatus(status, request.getRequestIds());
@@ -169,7 +168,9 @@ public class EventPrivateServiceImpl implements EventPrivateService {
             throw new UnfulfilledConditionException("An event with the PUBLISHED status cannot be changed");
         }
 
-        if (update.getAnnotation() != null) eventOld.setAnnotation(update.getAnnotation());
+        if (update.getAnnotation() != null) {
+            eventOld.setAnnotation(update.getAnnotation());
+        }
 
         if (update.getCategory() != null && !update.getCategory().equals(eventOld.getCategory().getId())) {
             eventOld.setCategory(categoryValidator(update.getCategory()));
@@ -180,12 +181,29 @@ public class EventPrivateServiceImpl implements EventPrivateService {
             eventOld.setLon(update.getLocation().getLon());
         }
 
-        if (update.getTitle() != null) eventOld.setTitle(update.getTitle());
-        if (update.getDescription() != null) eventOld.setDescription(update.getDescription());
-        if (update.getEventDate() != null) eventOld.setEventDate(update.getEventDate());
-        if (update.getPaid() != null) eventOld.setPaid(update.getPaid());
-        if (update.getParticipantLimit() != null) eventOld.setParticipantLimit(update.getParticipantLimit());
-        if (update.getRequestModeration() != null) eventOld.setRequestModeration(update.getRequestModeration());
+        if (update.getTitle() != null) {
+            eventOld.setTitle(update.getTitle());
+        }
+
+        if (update.getDescription() != null) {
+            eventOld.setDescription(update.getDescription());
+        }
+
+        if (update.getEventDate() != null) {
+            eventOld.setEventDate(update.getEventDate());
+        }
+
+        if (update.getPaid() != null) {
+            eventOld.setPaid(update.getPaid());
+        }
+
+        if (update.getParticipantLimit() != null) {
+            eventOld.setParticipantLimit(update.getParticipantLimit());
+        }
+
+        if (update.getRequestModeration() != null) {
+            eventOld.setRequestModeration(update.getRequestModeration());
+        }
 
         StateAction state = update.getState();
         if (state != null) {

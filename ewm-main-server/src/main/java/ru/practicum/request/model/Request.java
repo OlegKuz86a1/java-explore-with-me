@@ -11,10 +11,8 @@ import ru.practicum.user.model.User;
 
 import java.time.LocalDateTime;
 
-@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

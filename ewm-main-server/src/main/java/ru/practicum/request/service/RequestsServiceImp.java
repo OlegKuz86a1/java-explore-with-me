@@ -85,9 +85,11 @@ public class RequestsServiceImp implements RequestsService {
 
         if (event.getParticipantLimit() > 0) {
             int confirmationRequests = requestsRepository.countByEventIdAndStatus(event.getId(), Status.CONFIRMED);
-            if (confirmationRequests >= event.getParticipantLimit())
+
+            if (confirmationRequests >= event.getParticipantLimit()) {
                 throw new UnfulfilledConditionException(
                         String.format("Number of requests exceeded for the event id=%s ", event.getId()));
+            }
         }
     }
 }

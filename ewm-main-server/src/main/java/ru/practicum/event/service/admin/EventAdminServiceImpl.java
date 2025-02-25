@@ -107,13 +107,34 @@ public class EventAdminServiceImpl implements EventAdminService {
     }
 
     private Event checkingAndUpdatingEvent(EventUpdateDto update, Event eventOld) {
-        if (update.getAnnotation() != null) eventOld.setAnnotation(update.getAnnotation());
-        if (update.getTitle() != null) eventOld.setTitle(update.getTitle());
-        if (update.getDescription() != null) eventOld.setDescription(update.getDescription());
-        if (update.getEventDate() != null) eventOld.setEventDate(update.getEventDate());
-        if (update.getPaid() != null) eventOld.setPaid(update.getPaid());
-        if (update.getParticipantLimit() != null) eventOld.setParticipantLimit(update.getParticipantLimit());
-        if (update.getRequestModeration() != null) eventOld.setRequestModeration(update.getRequestModeration());
+        if (update.getAnnotation() != null) {
+            eventOld.setAnnotation(update.getAnnotation());
+        }
+
+        if (update.getTitle() != null) {
+            eventOld.setTitle(update.getTitle());
+        }
+
+        if (update.getDescription() != null) {
+            eventOld.setDescription(update.getDescription());
+        }
+
+        if (update.getEventDate() != null) {
+            eventOld.setEventDate(update.getEventDate());
+        }
+
+        if (update.getPaid() != null) {
+            eventOld.setPaid(update.getPaid());
+        }
+
+        if (update.getParticipantLimit() != null) {
+            eventOld.setParticipantLimit(update.getParticipantLimit());
+        }
+
+        if (update.getRequestModeration() != null) {
+            eventOld.setRequestModeration(update.getRequestModeration());
+        }
+
         if (update.getCategory() != null && !update.getCategory().equals(eventOld.getCategory().getId())) {
             eventOld.setCategory(categoryValidator(update.getCategory()));
         }

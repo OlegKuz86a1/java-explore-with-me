@@ -63,7 +63,7 @@ public class StatsServiceImpl implements StatsService {
 
         } catch (InvalidParameterException | DateTimeParseException e) {
             log.error("Error decoding date: {}, reason: {}", date, e.getMessage());
-            throw new InvalidParameterException("Invalid date format: " + date, e);
+            throw new IncorrectParametersException("Uncorrected format of dates");
         }
     }
 }
