@@ -26,7 +26,7 @@ public class Comment extends BaseEntity {
     private User author;
 
     @Column(length = 2000, nullable = false)
-    private String text;
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "event_id")

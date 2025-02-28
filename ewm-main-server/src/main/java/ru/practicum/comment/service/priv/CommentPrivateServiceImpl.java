@@ -3,6 +3,8 @@ package ru.practicum.comment.service.priv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.comment.CommentRepository;
 import ru.practicum.comment.model.Comment;
 import ru.practicum.comment.model.CommentMapper;
@@ -24,7 +26,8 @@ import static ru.practicum.enums.Status.PUBLISHED;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class CommentPrivetServiceImpl implements CommentPrivetService {
+@Transactional(propagation = Propagation.REQUIRES_NEW)
+public class CommentPrivateServiceImpl implements CommentPrivateService {
     private final UserRepository userRepo;
     private final EventRepository eventRepo;
     private final CommentMapper commentMapper;
@@ -36,7 +39,7 @@ public class CommentPrivetServiceImpl implements CommentPrivetService {
         Event event = eventRepo.findById(eventId).orElseThrow(() -> new NotFoundException(
                 String.format("Event with id=%s not found", eventId)));
         validatePublishedEvent(event);
-        Comment commentSave = commentRepo.save(commentMapper.mapInDtoToEntity(comment, user, event));
+        Comment commentSave = commentRepo.save(CommentMapper.mapInDtoToEntity(comment, user, event));
 
         log.info("The comment has been added for an event with an Id {} and a user with an id {}",
                 eventId, userId);
@@ -49,7 +52,7 @@ public class CommentPrivetServiceImpl implements CommentPrivetService {
         userValidator(userId);
         Comment comment = commentValidator(commentId);
         authorValidator(userId, comment);
-        comment.setText(updateComment.getText());
+        comment.setContent(updateComment.getContent());
         comment.setCreated(LocalDateTime.now());
 
         log.info("The comment with id {} has been updated for an event with id {} ", commentId,

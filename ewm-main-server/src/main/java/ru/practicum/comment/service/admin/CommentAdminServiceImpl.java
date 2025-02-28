@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.comment.CommentRepository;
 import ru.practicum.comment.model.Comment;
 import ru.practicum.comment.model.CommentMapper;
@@ -23,6 +25,7 @@ import static org.springframework.http.HttpStatus.OK;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class CommentAdminServiceImpl implements CommentAdminService {
 
     private final UserRepository userRepo;
@@ -31,25 +34,25 @@ public class CommentAdminServiceImpl implements CommentAdminService {
     private final CommentRepository commentRepo;
 
     @Override
-    public List<CommentOutDto> commentAdminSearch(String text, int from, int size) {
+    public List<CommentOutDto> commentAdminSearch(String content, int from, int size) {
 
-        if (text.isBlank()) {
+        if (content.isBlank()) {
             ResponseEntity
                     .status(OK)
                     .body(new ArrayList<>());
         }
 
         Pageable pageable = PageRequest.of(from, size);
-        List<Comment> searchComments = commentRepo.findCommentsByText(text, pageable).getContent();
+        List<Comment> searchComments = commentRepo.findCommentsByContent(content, pageable).getContent();
 
-        log.info("The comment with text {}, has been successfully received", text);
+        log.info("The comment with text {}, has been successfully received", content);
         return commentMapper.mapToListDto(searchComments);
     }
 
     @Override
     public CommentOutDto commentAdminUpdate(Long commentId, CommentInDto commentInDto) {
         Comment comment = commentValidator(commentId);
-        comment.setText(commentInDto.getText());
+        comment.setContent(commentInDto.getContent());
         CommentOutDto commentOutDto = commentMapper.toDto(commentRepo.save(comment));
 
         log.info("The comment with id {} has been updated", commentId);

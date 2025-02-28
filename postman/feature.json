@@ -226,9 +226,9 @@
 									"const source = JSON.parse(pm.request.body.raw);",
 									"const target = pm.response.json();",
 									"",
-									"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {",
+									"pm.test(\"Комментарий должен содержать поля: id, created, content, author, event\", function () {",
 									"pm.expect(target).to.have.property('id');",
-									"pm.expect(target).to.have.property('text');",
+									"pm.expect(target).to.have.property('content');",
 									"pm.expect(target).to.have.property('author');",
 									"pm.expect(target).to.have.property('created');",
 									"pm.expect(target).to.have.property('event');",
@@ -244,7 +244,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"text\": \"Добавления первого комментария для первого события\"\n}",
+							"raw": "{\n    \"content\": \"Добавления первого комментария для первого события\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,9 +295,9 @@
 									"const source = JSON.parse(pm.request.body.raw);",
 									"const target = pm.response.json();",
 									"",
-									"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {",
+									"pm.test(\"Комментарий должен содержать поля: id, created, content, author, event\", function () {",
 									"pm.expect(target).to.have.property('id');",
-									"pm.expect(target).to.have.property('text');",
+									"pm.expect(target).to.have.property('content');",
 									"pm.expect(target).to.have.property('author');",
 									"pm.expect(target).to.have.property('created');",
 									"pm.expect(target).to.have.property('event');",
@@ -313,7 +313,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"text\": \"Обновление комента c id 1 для события с id 1\"\n}",
+							"raw": "{\n    \"content\": \"Обновление комента c id 1 для события с id 1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -519,7 +519,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/admin/comments?text=для события",
+							"raw": "http://localhost:8080/admin/comments?content=для события",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -531,7 +531,7 @@
 							],
 							"query": [
 								{
-									"key": "text",
+									"key": "content",
 									"value": "для события"
 								}
 							]
@@ -555,9 +555,9 @@
 									"const source = JSON.parse(pm.request.body.raw);",
 									"const target = pm.response.json();",
 									"",
-									"pm.test(\"Комментарий должен содержать поля: id, created, text, author, event\", function () {",
+									"pm.test(\"Комментарий должен содержать поля: id, created, content, author, event\", function () {",
 									"pm.expect(target).to.have.property('id');",
-									"pm.expect(target).to.have.property('text');",
+									"pm.expect(target).to.have.property('content');",
 									"pm.expect(target).to.have.property('author');",
 									"pm.expect(target).to.have.property('created');",
 									"pm.expect(target).to.have.property('event');",
@@ -573,7 +573,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"text\": \"Снова обновление комента c id 1 для события с id 1\"\n}",
+							"raw": "{\n    \"content\": \"Снова обновление комента c id 1 для события с id 1\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

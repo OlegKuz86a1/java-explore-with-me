@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.comment.CommentRepository;
 import ru.practicum.comment.model.CommentMapper;
 import ru.practicum.comment.model.dto.CommentOutDto;
@@ -16,6 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 public class CommentPublicServiceImpl implements CommentPublicService {
     private final EventRepository eventRepo;
     private final CommentMapper commentMapper;

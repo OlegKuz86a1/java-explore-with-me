@@ -22,10 +22,10 @@ public class CommentAdminController {
     private final CommentAdminService service;
 
     @GetMapping
-    public List<CommentOutDto> commentAdminSearch(@RequestParam String text,
+    public List<CommentOutDto> commentAdminSearch(@RequestParam String content,
                                                   @RequestParam(defaultValue = "0") @Min(0) int  from,
                                                   @RequestParam(defaultValue = "10") @Min(1)int size) {
-        return service.commentAdminSearch(text, from, size);
+        return service.commentAdminSearch(content, from, size);
     }
 
     @PatchMapping("/{commentId}")

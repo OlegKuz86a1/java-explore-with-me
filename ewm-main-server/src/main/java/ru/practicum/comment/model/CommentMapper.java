@@ -18,11 +18,11 @@ public abstract class CommentMapper  {
     @Mapping(target = "author", source = "author.id")
     public abstract CommentOutDto toDto(Comment entity);
 
-    public Comment mapInDtoToEntity(CommentInDto commentInDto, User author, Event event) {
+    public static Comment mapInDtoToEntity(CommentInDto commentInDto, User author, Event event) {
         return Comment.builder()
                 .event(event)
                 .author(author)
-                .text(commentInDto.getText())
+                .content(commentInDto.getContent())
                 .created(LocalDateTime.now())
                 .build();
     }

@@ -20,6 +20,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     Page<Comment> findAllByEventId(Long eventId, Pageable pageable);
 
-    @Query(value = "select c from Comment c where lower(c.text) like lower(concat('%', :text, '%'))")
-    Page<Comment> findCommentsByText(@Param("text") String text, Pageable pageable);
+    @Query(value = "select c from Comment c where lower(c.content) like lower(concat('%', :content, '%'))")
+    Page<Comment> findCommentsByContent(@Param("content") String content, Pageable pageable);
 }

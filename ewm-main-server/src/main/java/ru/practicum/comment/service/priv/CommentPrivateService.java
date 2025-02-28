@@ -5,7 +5,7 @@ import ru.practicum.comment.model.dto.CommentOutDto;
 
 import java.util.List;
 
-public interface CommentPrivetService {
+public interface CommentPrivateService {
 
     CommentOutDto addComment(Long userId, Long eventId, CommentInDto comment);
 

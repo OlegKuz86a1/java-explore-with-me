@@ -8,7 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.comment.model.dto.CommentInDto;
 import ru.practicum.comment.model.dto.CommentOutDto;
-import ru.practicum.comment.service.priv.CommentPrivetService;
+import ru.practicum.comment.service.priv.CommentPrivateService;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @Validated
 public class CommentPrivetController {
 
-    private final CommentPrivetService service;
+    private final CommentPrivateService service;
 
     @PostMapping("/events/{eventId}")
     @ResponseStatus(HttpStatus.CREATED)
